@@ -63,7 +63,7 @@ export default function Page() {
     }, [data])
 
     return (
-        <div className="w-full h-[90vh] flex justify-center items-center">
+        <div className="w-full h-[100vh] flex justify-center items-center">
             <div className="flex flex-col justify-center items-center">
                 <p className="text-white text-4xl font-bold">Secret Phrases</p>
                 <p className="text-white text-sm py-4">save these phrases somewhere safe</p>

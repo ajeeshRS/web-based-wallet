@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="w-full h-[90vh] flex flex-col justify-start items-center  py-40 ">
+      <div className="w-full h-[100vh] flex flex-col justify-start items-center py-40 ">
         <p className="md:text-5xl text-2xl text-center font-bold text-white px-2">One Click to Create Wallets and See Your Keys.</p>
         <button onClick={generateSeedPhrase} className="my-10 bg-blue-600 p-3 rounded-lg hover:bg-blue-700 transition duration-200 ease-in-out text-white">Create New Wallet</button>
       </div>
