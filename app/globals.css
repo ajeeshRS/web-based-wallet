@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.grid_background_dark {
+  @apply bg-[#000000];
+  background-image: linear-gradient(to right, #0f0f0f 1px, transparent 1px),
+    linear-gradient(to bottom, #0f0f0f 1px, transparent 1px);
+  background-size: 35px 35px;
+}
