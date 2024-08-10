@@ -53,7 +53,7 @@ export default function Page() {
             }
             setData(JSON.parse(details))
         }
-    }, [])
+    }, [router])
 
     useEffect(() => {
         if (data?.mnemonic) {
@@ -70,7 +70,7 @@ export default function Page() {
                 <div onClick={handleClick} className="w-full bg-[#111111] rounded-lg p-10 md:mx-0 mx-4 grid md:grid-cols-4 grid-cols-2 md:gap-12 gap-8 cursor-pointer">
                     {
                         phrases.map((phrase, index) => (
-                            <p className="text-[#ffffff]"><span className="text-[#888] mr-3">{index + 1}</span>    {phrase}</p>
+                            <p key={index} className="text-[#ffffff]"><span className="text-[#888] mr-3">{index + 1}</span>    {phrase}</p>
                         ))
                     }
                 </div>
