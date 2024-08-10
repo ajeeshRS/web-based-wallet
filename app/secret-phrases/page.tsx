@@ -63,10 +63,10 @@ export default function Page() {
     }, [data])
 
     return (
-        <div className="w-full h-[80vh] flex justify-center items-center">
+        <div className="w-full md:h-[80vh] h-[90vh] flex justify-center items-center">
             <div className="flex flex-col justify-center items-center">
                 <p className="text-white text-4xl font-bold">Secret Phrases</p>
-                <p className="text-white text-sm py-4">save these phrases somewhere safe</p>
+                <p className="text-white text-sm md:py-4 py-2">save these phrases somewhere safe</p>
                 <div onClick={handleClick} className="w-full bg-[#111111] rounded-lg p-10 md:mx-0 mx-4 grid md:grid-cols-4 grid-cols-2 md:gap-12 gap-8 cursor-pointer">
                     {
                         phrases.map((phrase, index) => (
@@ -74,8 +74,8 @@ export default function Page() {
                         ))
                     }
                 </div>
-                <p className="text-[#636262] py-2 my-3 font-semibold ">Note: Click anywhere in the card to copy</p>
-                <button onClick={handleNextBtn} className="text-white bg-blue-600 px-8 py-2 my-3 rounded-lg hover:bg-blue-700 transition duration-200 ease-in-out">
+                <p className="text-[#636262] py-2 md:my-3 my-1 font-semibold ">Note: Click anywhere in the card to copy</p>
+                <button onClick={handleNextBtn} className="text-white bg-blue-600 px-8 py-2 md:my-3 my-1 rounded-lg hover:bg-blue-700 transition duration-200 ease-in-out">
                     Next
                 </button>
             </div>
