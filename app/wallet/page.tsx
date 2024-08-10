@@ -29,7 +29,7 @@ export default function Page() {
     }, [])
     return (
         <div className="w-full md:h-[80vh] h-[90vh] flex justify-center py-5">
-            <div className="md:w-4/6 w-5/6 h-6/6 bg-[#111111] rounded-lg md:p-4 p-3 cursor-pointer">
+            <div className="md:w-4/6 w-5/6 md:h-6/6 h-5/6 bg-[#111111] rounded-lg md:p-4 p-3 cursor-pointer">
                 {
                     wallets?.map((wallet, index) => (
                         <div className="md:py-0 py-4 px-1 md:px-4 my-2" key={index}>

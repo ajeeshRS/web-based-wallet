@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="w-full h-[100svh] grid_background_dark">
+        <main className="w-full h-[100vh] grid_background_dark">
           <Navbar />
           {children}
           <Toaster />
