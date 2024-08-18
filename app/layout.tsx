@@ -1,8 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar/NavBar";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
+import Navbar from "@/components/navbar/NavBar";
 
 export const metadata: Metadata = {
   title: "CryptoVault",
