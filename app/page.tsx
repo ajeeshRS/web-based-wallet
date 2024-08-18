@@ -11,6 +11,7 @@ export default function Home() {
       publicKey: string,
       address: string,
       path: string,
+      privateKey: string
     }
 
     const mnemonic = generateMnemonic();
@@ -21,17 +22,16 @@ export default function Home() {
 
     let wallets: walletDetails[] = [];
 
-    for (let i = 0; i < 3; i++) {
-      let derivativePath = `m/44'/60'/0'/0/${i}`;
+    let derivativePath = `m/44'/60'/0'/0/0`;
 
-      const newWallet = wallet.derivePath(derivativePath);
+    const newWallet = wallet.derivePath(derivativePath);
 
-      wallets.push({
-        publicKey: newWallet.publicKey,
-        address: newWallet.address,
-        path: derivativePath,
-      });
-    }
+    wallets.push({
+      publicKey: newWallet.publicKey,
+      address: newWallet.address,
+      path: derivativePath,
+      privateKey: newWallet.privateKey
+    });
 
     const data = {
       mnemonic: mnemonic,

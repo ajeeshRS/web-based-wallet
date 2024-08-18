@@ -35,13 +35,7 @@ export default function Page() {
     }
 
     const handleNextBtn = () => {
-        const wallets = data?.wallets
-
-        if (wallets) {
-            localStorage.setItem("data", JSON.stringify(wallets))
-        }
         router.push("/wallet")
-
     }
 
     useEffect(() => {
