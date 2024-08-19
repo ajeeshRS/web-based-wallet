@@ -79,9 +79,7 @@ export default function viewWallet() {
                             Receive <Image src={scanIcon} alt="scan-icon" className="w-6 h-6 ml-1" />
                         </button>
                     </div>
-                    {
-                        qrCode && <ShowQrCode address={id} />
-                    }
+                   
                 </div>
             </div>
         </div>

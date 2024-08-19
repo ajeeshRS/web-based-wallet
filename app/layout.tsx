@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import Navbar from "@/components/navbar/Navbar";
+import Navbar from "@/components/navbar/NavBar";
 
 export const metadata: Metadata = {
   title: "CryptoVault",
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className="w-full h-[100vh] grid_background_dark">
-          <Navbar />
+          < Navbar/>
           {children}
           <Toaster />
         </main>
