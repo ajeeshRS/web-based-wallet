@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import ethIcon from "../../../public/ethereum-branded.svg"
 import sendIcon from "../../../public/Send.svg"
 import scanIcon from "../../../public/Scan.svg"
-import { QRCodeCanvas } from "qrcode.react";
 import Image from "next/image";
 import ShowQrCode from "@/components/QrCodeDialog";
 import Loader from "@/components/Loader";
@@ -17,7 +16,8 @@ export default function ViewWallet() {
     const [balance, setBalance] = useState<string | null>(null);
     const [balanceInUsd, setBalanceInUsd] = useState<string | null>(null);
     const [isVisible, setIsVisible] = useState<boolean>(false)
-    const [qrCode, setQrCode] = useState<boolean>(false)
+    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
+
 
     const getBalance = async (address: any) => {
         try {
@@ -33,8 +33,12 @@ export default function ViewWallet() {
         }
     }
 
-    const viewQrCode = () => {
-        setQrCode(true)
+    const handleOpen = () => {
+        setIsDialogOpen(true)
+    }
+
+    const handleClose = () => {
+        setIsDialogOpen(false)
     }
 
     useEffect(() => {
@@ -83,9 +87,12 @@ export default function ViewWallet() {
                         <button className="p-3 text-white bg-black hover:bg-[#3f3f3f] rounded-xl text-sm duration-300 transition ease-in-out mx-2 flex items-center">
                             Send <Image src={sendIcon} alt="send-icon" className="w-6 h-6 ml-1" />
                         </button>
-                        <button className="p-3 text-white bg-black hover:bg-[#3f3f3f] rounded-xl text-sm duration-300 transition ease-in-out mx-2 flex items-center" onClick={viewQrCode}>
+                        <button className="p-3 text-white bg-black hover:bg-[#3f3f3f] rounded-xl text-sm duration-300 transition ease-in-out mx-2 flex items-center" onClick={handleOpen}>
                             Receive <Image src={scanIcon} alt="scan-icon" className="w-6 h-6 ml-1" />
                         </button>
+                        {
+                            isDialogOpen && <ShowQrCode address={wallet.address} onClose={handleClose} />
+                        }
                     </div>
 
                 </div>
