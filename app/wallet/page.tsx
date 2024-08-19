@@ -1,5 +1,6 @@
 "use client"
 
+import Loader from "@/components/Loader";
 import { mnemonicToSeedSync } from "bip39";
 import { HDNodeWallet } from "ethers";
 import { useRouter } from "next/navigation";
@@ -25,6 +26,7 @@ export default function Page() {
     const [wallets, setWallets] = useState<walletDetails[]>([])
     const [mnemonic, setMnemonic] = useState<string>("")
     const [lsData, setLsData] = useState<Data | []>([])
+    const [loading, setLoading] = useState<boolean>(false)
 
     const handleCopy = (text: string) => {
         window.navigator.clipboard.writeText(text).then(() => {
@@ -37,6 +39,7 @@ export default function Page() {
 
     const createWallet = (mnemonic: string) => {
         try {
+            setLoading(true)
             const seed = mnemonicToSeedSync(mnemonic);
 
             const HDwallet = HDNodeWallet.fromSeed(seed);
@@ -52,7 +55,7 @@ export default function Page() {
                 privateKey: newWallet.privateKey
             }
             setWallets((prevWallets) => [...prevWallets, createdWallet])
-
+            setLoading(false)
             toast.success("Wallet created")
 
         } catch (err) {
@@ -128,7 +131,7 @@ export default function Page() {
                         </div>
                     ))
                 }
-                <button onClick={() => createWallet(mnemonic)} className="my-10 bg-blue-600 p-3 rounded-lg hover:bg-blue-700 transition duration-200 ease-in-out text-white">Create New Wallet</button>
+                <button onClick={() => createWallet(mnemonic)} className="my-10 bg-blue-600 p-3 rounded-lg hover:bg-blue-700 transition duration-200 ease-in-out text-white flex justify-center items-center">{loading ? <Loader /> : "Add New Wallet"}</button>
             </div>
 
         </div>
