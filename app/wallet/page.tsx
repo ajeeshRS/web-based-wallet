@@ -101,7 +101,7 @@ export default function Page() {
             }
             localStorage.setItem("data", JSON.stringify(data))
         }
-    }, [wallets]);
+    }, [wallets,mnemonic]);
 
     return (
         <div className="w-full md:h-fit h-fit flex justify-center py-5 grid_background_dark">

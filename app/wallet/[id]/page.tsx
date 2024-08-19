@@ -10,7 +10,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import Image from "next/image";
 import ShowQrCode from "@/components/QrCodeDialog";
 
-export default function viewWallet() {
+export default function ViewWallet() {
     const { id } = useParams()
     const [wallet, setWallet] = useState<any>(null);
     const [balance, setBalance] = useState<string | null>(null);
