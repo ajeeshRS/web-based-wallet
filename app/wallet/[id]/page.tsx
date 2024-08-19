@@ -9,6 +9,7 @@ import scanIcon from "../../../public/Scan.svg"
 import { QRCodeCanvas } from "qrcode.react";
 import Image from "next/image";
 import ShowQrCode from "@/components/QrCodeDialog";
+import Loader from "@/components/Loader";
 
 export default function ViewWallet() {
     const { id } = useParams()
@@ -48,8 +49,12 @@ export default function ViewWallet() {
         }
     }, [id]);
 
-    if (!wallet) {
-        return <p>Wallet not found or Loading...</p>;
+    if (!balanceInUsd) {
+        return (
+            <div className="w-full h-[80vh] flex justify-center items-center py-5 grid_background_dark">
+                <Loader />
+            </div>
+        )
     }
 
     return (
