@@ -60,8 +60,11 @@ export default function ViewWallet() {
                     <div className="text-center">
                         <p>Ethereum</p>
                         <div className="w-full flex items-center justify-center my-2">
-                            <p className="text-5xl font-bold">$0.00</p>
+                            <p className="text-5xl font-bold">${balanceInUsd}</p>
                             <Image src={ethIcon} alt="eth-icon" className="w-10 h-10" />
+                        </div>
+                        <div className="text-center">
+                            <p>ETH:{balance}</p>
                         </div>
                     </div>
                     <div className="my-10">
@@ -79,7 +82,7 @@ export default function ViewWallet() {
                             Receive <Image src={scanIcon} alt="scan-icon" className="w-6 h-6 ml-1" />
                         </button>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
