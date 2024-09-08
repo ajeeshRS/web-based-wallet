@@ -1,6 +1,5 @@
 import axios from "axios";
-const ALCHEMY_URL = process.env.NEXT_PUBLIC_ALCHEMY_URL || "";
-const COINGECKO_API_URL = "https://api.coingecko.com/api/v3/simple/price";
+const ALCHEMY_URL: string = process.env.NEXT_PUBLIC_ALCHEMY_URL ||"";
 
 export const getEthBalance = async (address: String) => {
   try {
@@ -9,7 +8,6 @@ export const getEthBalance = async (address: String) => {
       method: "eth_getBalance",
       params: [address, "latest"],
     };
-
     const res = await axios.post(ALCHEMY_URL, data, {
       headers: {
         "Content-Type": "application/json",
@@ -26,18 +24,20 @@ export const getEthBalance = async (address: String) => {
   }
 };
 
-export const getUsdRate = async (ethValue: string) => {
+export const getUsdRate = async (value: string, crypto: string) => {
   try {
-    const response = await axios.get(COINGECKO_API_URL, {
-      params: {
-        ids: "ethereum",
-        vs_currencies: "usd",
-      },
-    });
-
-    const balanceInUsd = (
-      parseFloat(ethValue) * response.data.ethereum.usd
-    ).toFixed(2);
+    console.log(crypto);
+    const response = await axios.get(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${crypto}&vs_currencies=usd`
+    );
+    let balanceInUsd: any;
+    if (crypto === "ethereum") {
+      balanceInUsd = (parseFloat(value) * response.data.ethereum.usd).toFixed(
+        2
+      );
+    } else if (crypto === "solana") {
+      balanceInUsd = (parseFloat(value) * response.data.solana.usd).toFixed(2);
+    }
 
     return balanceInUsd;
   } catch (err) {
