@@ -2,7 +2,7 @@
 import { getEthBalance, getUsdRate } from "@/utils/utils";
 import { formatEther } from "ethers";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ethIcon from "../../../public/ethereum-branded.svg";
 import solIcon from "../../../public/solana-sol-logo.png";
 import sendIcon from "../../../public/Send.svg";
@@ -16,8 +16,13 @@ import {
   LAMPORTS_PER_SOL,
   PublicKey,
 } from "@solana/web3.js";
+import TransactDialog from "@/components/TransactDialog";
+import toast from "react-hot-toast";
 
 export default function ViewWallet() {
+  const endpoint = clusterApiUrl("devnet");
+  const wallets = useMemo(() => [], []);
+
   const { id } = useParams();
   const [crypto, setCrypto] = useState<string>("");
   const [wallet, setWallet] = useState<any>(null);
@@ -25,6 +30,8 @@ export default function ViewWallet() {
   const [balanceInUsd, setBalanceInUsd] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isTransactDialogOpen, setIsTransactDialogOpen] =
+    useState<boolean>(false);
   const [privateKey, setPrivateKey] = useState<string>("");
 
   const getBalanceETH = async (address: any) => {
@@ -64,6 +71,16 @@ export default function ViewWallet() {
 
   const handleClose = () => {
     setIsDialogOpen(false);
+  };
+  const handleTransactOpen = () => {
+    if(crypto === "ETH"){
+      return toast.success("Coming soon for ETH")
+    }
+    setIsTransactDialogOpen(true);
+  };
+
+  const handleTransactClose = () => {
+    setIsTransactDialogOpen(false);
   };
 
   useEffect(() => {
@@ -127,10 +144,21 @@ export default function ViewWallet() {
             </div>
           </div>
           <div className="w-full flex items-center justify-center">
-            <button className="p-3 text-white bg-black hover:bg-[#3f3f3f] rounded-xl text-sm duration-300 transition ease-in-out mx-2 flex items-center">
+            <button
+              className="p-3 text-white bg-black hover:bg-[#3f3f3f] rounded-xl text-sm duration-300 transition ease-in-out mx-2 flex items-center"
+              onClick={handleTransactOpen}
+            >
               Send{" "}
               <Image src={sendIcon} alt="send-icon" className="w-6 h-6 ml-1" />
             </button>
+            {isTransactDialogOpen && (
+              <TransactDialog
+                address={wallet.address}
+                onClose={handleTransactClose}
+                crypto={crypto}
+                privateKey={wallet.privateKey}
+              />
+            )}
             <button
               className="p-3 text-white bg-black hover:bg-[#3f3f3f] rounded-xl text-sm duration-300 transition ease-in-out mx-2 flex items-center"
               onClick={handleOpen}
@@ -139,7 +167,11 @@ export default function ViewWallet() {
               <Image src={scanIcon} alt="scan-icon" className="w-6 h-6 ml-1" />
             </button>
             {isDialogOpen && (
-              <ShowQrCode address={wallet.address} onClose={handleClose} crypto={crypto} />
+              <ShowQrCode
+                address={wallet.address}
+                onClose={handleClose}
+                crypto={crypto}
+              />
             )}
           </div>
         </div>
